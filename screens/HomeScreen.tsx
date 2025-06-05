@@ -11,6 +11,7 @@ import db, {
   getAllJobs,
 } from '../utils/database';
 import { RootStackParamList } from '../types/navigation';
+import { API_BASE_URL } from '../utils/config';
 
 type Job = {
   id: string;
@@ -41,7 +42,7 @@ const HomeScreen = () => {
 
   const handleSync = async () => {
     try {
-      const response = await axios.post('http://192.168.0.110:3000/sync_job');
+      const response = await axios.post(`${API_BASE_URL}/sync_job`);
       const { status, jobs, equipment } = response.data;
 
       if (status === 'success') {

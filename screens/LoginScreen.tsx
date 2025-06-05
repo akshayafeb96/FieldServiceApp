@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { API_BASE_URL } from '../utils/config';
 
 type RootStackParamList = {
   Login: undefined;
@@ -38,11 +39,7 @@ const LoginScreen = () => {
     console.log('Sending login to API...');
 
     try {
-      const response = await axios.post('http://192.168.0.110:3000/login', {
-        username,
-        password,
-      });
-
+      const response = await axios.post(`${API_BASE_URL}/login`, { username, password });
       console.log('API response:', response.data);
 
       const { status, token } = response.data;
